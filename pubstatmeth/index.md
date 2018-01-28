@@ -1,4 +1,12 @@
-#Index
+---
+author: Michael Penhallegon
+title: "Public Health Statistical Methods"
+---
 
-[lab 1](./lab1.html)
-[lab 2](./lab2.html)
+# Labs
+
+* [lab 1](./lab1.html)
+* [lab 2](./lab2.html)
+
+# Summaries
+
