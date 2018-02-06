@@ -138,7 +138,6 @@ library(dplyr)</code></pre>
 ##     intersect, setdiff, setequal, union</code></pre>
 <pre class="r"><code># load the dataset
 url &lt;- &quot;https://raw.githubusercontent.com/genomicsclass/dagdata/master/inst/extdata/femaleControlsPopulation.csv&quot;
-
 femaleControlPop &lt;- unlist(read.csv(url))</code></pre>
 </div>
 <div id="section" class="section level1">
@@ -166,15 +165,11 @@ set.seed(5)
 
 #take second sample
 femaleControlSample2 &lt;- sample(femaleControlPop, 5)
-
 abs(mean(femaleControlSample2) - mean(femaleControlPop))</code></pre>
 <pre><code>## [1] 1.433378</code></pre>
 </div>
 <div id="section-3" class="section level1">
 <h1>4</h1>
-</div>
-<div id="todo-check-this-answer-to-the-text" class="section level1">
-<h1>TODO: check this answer to the text</h1>
 <p>C, taking different sample will result in difference means</p>
 </div>
 <div id="section-4" class="section level1">
@@ -195,9 +190,7 @@ simple_resample &lt;- function(dat, func=identity, ns=1000, ss=5){
 }
 
 resampled_FemaleControl &lt;- simple_resample(femaleControlPop)
-
 above_1 &lt;- resampled_FemaleControl[resampled_FemaleControl &gt; (1+mean(resampled_FemaleControl))] %&gt;% length
-
 above_1 / length(resampled_FemaleControl)</code></pre>
 <pre><code>## [1] 0.3368631</code></pre>
 </div>
@@ -205,11 +198,7 @@ above_1 / length(resampled_FemaleControl)</code></pre>
 <h1>6</h1>
 <p>resample 10,000</p>
 <pre class="r"><code>re10000_FemaleControl &lt;- simple_resample(femaleControlPop, ns=10000)
-
-
 above1_10000 &lt;- re10000_FemaleControl[re10000_FemaleControl &gt; (1+mean(re10000_FemaleControl))] %&gt;% length
-
-
 above1_10000 / (re10000_FemaleControl %&gt;% length)</code></pre>
 <pre><code>## [1] 0.3364064</code></pre>
 </div>
@@ -232,7 +221,6 @@ hist(r5)</code></pre>
 <div id="section-8" class="section level1">
 <h1>9</h1>
 <pre class="r"><code>#let's create function since we have to do it &gt; 1 times
-
 percentage_dist &lt;- function(dist, lowerbound, upperbound){
   return ((dist[(dist&gt;=lowerbound) &amp; (dist&lt;=upperbound)] %&gt;% length) / (dist %&gt;% length))
   
