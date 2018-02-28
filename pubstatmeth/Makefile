@@ -1,4 +1,4 @@
-LABS = matrix_algebra/lab1.Rmd getting_started/lab1.Rmd getting_started/lab2.Rmd
+LABS = matrix_algebra/lab1.Rmd getting_started/lab1.Rmd getting_started/lab2.Rmd getting_started/lab3.Rmd getting_started/lab4.Rmd
 
 build:
 	./Rmd.sh $(LABS)
