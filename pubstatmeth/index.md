@@ -11,7 +11,7 @@ title: "Public Health Statistical Methods"
 
 * [Lab 1](./ph525.1/lab1.html)
 * [Lab 2](./ph525.1/lab2.html)
-* [Lab 3](./ph525.1/lab2.html)
+* [Lab 3](./ph525.1/lab3.html)
 * [Lab 4](./ph525.1/lab4.html)
 
 
