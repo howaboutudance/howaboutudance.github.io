@@ -5,11 +5,12 @@ title: "Public Health Statistical Methods"
 
 # Summaries
 
-# PH525.1x Statistics and R
 * [summary 1](./summaries/week1.pdf)
 * [summary 2](./summaries/week2.pdf)
 * [summary 3](./summaries/week3.pdf)
 * [smuarry 5](./summaries/week5.pdf)
+
+# PH525.1x Statistics and R
 
 ## Labs
 
@@ -24,3 +25,4 @@ title: "Public Health Statistical Methods"
 ## Labs
 
 * [Lab 1](./ph525.2/lab1.html)
+* [Lab 2](./ph525.2/lab2.html)
