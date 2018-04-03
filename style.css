@@ -4,17 +4,71 @@ html{
 }
 body{
 	background: black;
-	animation-duration: 3.5s;
-	animation-name:fadein;
+	animation: 3.5s slideinmain ease;
 }
-div.container{
+article.container{
 	width: 100%;
 	text-align: center;
 	margin-top: 8em;
 	font-family: "Roboto", sans-serif;
 }
 
-@keyframes fadein {
+
+a {
+	color: white;
+}
+p {
+	color: white;
+}
+
+div.caption p{
+	font-family: 'IM Fell English', serif;
+	font-size: 12pt;
+	margin-bottom: none;
+	padding: none;
+}
+div.caption{
+	margin-top: -10px;
+	background: black;
+	z-index: 200;
+}
+
+img.under{
+	z-index: 0;
+	visibility: visible;
+}
+img.over{
+	margin-top: -345px;
+	z-index: 2;
+	animation: flicker 5s ease alternate infinite;
+}
+
+a:hover {
+	background: coral;
+}
+
+
+img.over:hover{
+	opacity: 0;
+}
+@keyframes flicker{
+	from {
+		opacity: 1;
+	}
+	23% {
+		opacity: 0.50;
+	}
+	45% {
+		opacity: 0.15;
+	}
+	68% {
+		opacity: 0.46;
+	}
+	to {
+		opacity: 0;
+	}
+}
+@keyframes slideinmain {
 	from {
 		margin-top: 100%;
 		background: #121023;
@@ -28,35 +82,4 @@ div.container{
 		margin-top: 0%;
 		opacity: 100;
 	}
-}
-a {
-	color: white;
-}
-p {
-	color: white;
-}
-
-div.caption p{
-	font-family: 'IM Fell English', serif;
-	font-size: 12pt;
-	margin-bottom: none;
-	margin-top: -10px;
-	padding: none;
-}
-
-img.under{
-	z-index: 0;
-	visibility: visible;
-}
-img.over{
-	margin-top: -345px;
-	z-index: 200;
-}
-
-a:hover {
-	background: coral;
-}
-
-img.over:hover{
-	visibility: hidden;
 }
