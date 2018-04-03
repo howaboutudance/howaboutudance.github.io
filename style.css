@@ -2,25 +2,40 @@ html{
 	width: 100%;
 	height: 100%;
 }
+
+/* structure */
 body{
 	background: black;
 	animation: 3.5s slideinmain ease;
 }
-article.container{
-	width: 100%;
-	text-align: center;
-	margin-top: 8em;
+article{
 	font-family: "Roboto", sans-serif;
+	margin-top: 8em;
+	text-align: center;
+	width: 100%;
 }
 
 
+
+footer{
+	font-family: "Roboto", sans-serif;
+	font-size: 6pt;
+	text-align: center;
+	width: 100%;
+}
+
+/* elements */
 a {
 	color: white;
+}
+a:hover {
+	background: coral;
 }
 p {
 	color: white;
 }
 
+/* classes */
 div.caption p{
 	font-family: 'IM Fell English', serif;
 	font-size: 12pt;
@@ -28,14 +43,14 @@ div.caption p{
 	padding: none;
 }
 div.caption{
-	margin-top: -10px;
 	background: black;
+	margin-top: -10px;
 	z-index: 200;
 }
 
 img.under{
-	z-index: 0;
 	visibility: visible;
+	z-index: 0;
 }
 img.over{
 	margin-top: -345px;
@@ -43,14 +58,11 @@ img.over{
 	animation: flicker 5s ease alternate infinite;
 }
 
-a:hover {
-	background: coral;
-}
-
-
 img.over:hover{
 	opacity: 0;
 }
+
+/* animations */
 @keyframes flicker{
 	from {
 		opacity: 1;
