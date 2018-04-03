@@ -4,12 +4,30 @@ html{
 }
 body{
 	background: black;
+	animation-duration: 4s;
+	animation-name:fadein;
 }
 div.container{
 	width: 100%;
 	text-align: center;
 	margin-top: 8em;
 	font-family: "Roboto", sans-serif;
+}
+
+@keyframes fadein {
+	from {
+		margin-top: 100%;
+		background: purple;
+		opacity: 0;
+	}
+	65% {
+		background: black;
+		opacity: 70;
+	}
+	to {
+		margin-top: 0%;
+		opacity: 100;
+	}
 }
 a {
 	color: white;
