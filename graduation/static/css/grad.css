@@ -1,0 +1,60 @@
+.color-primary-2 { color: #D8424D }
+.color-primary-3 { color: #9C0B16 }
+.color-primary-4 { color: #740009 }
+
+.color-secondary-1-0 { color: }	/* Main Secondary color (1) */
+.color-secondary-1-1 { color: }
+.color-secondary-1-2 { color: #DE6643 }
+.color-secondary-1-3 { color: #A02D0B }
+.color-secondary-1-4 { color: #771B00 }
+
+.color-secondary-2-0 { color: }	/* Main Secondary color (2) */
+.color-secondary-2-1 { color: #DE658E }
+.color-secondary-2-2 { color: #C33B69 }
+.color-secondary-2-3 { color: #8D0A36 }
+.color-secondary-2-4 { color: #690023 }
+
+body {
+    #9C0B16;
+    #740009;
+    --primary-color-0: #BE1E2A;
+    --primary-color-1: #F56F79;
+    --primary-color-2: #D8424D;
+    --primary-color-3: #9C0B16;
+    --primary-color-4: #740009;
+    --secondary-color-0: #AC1B4C;
+    --secondary-color-1: #FC9172;
+    margin: 0px auto; 
+    width: 920px;
+    background: #6d6e70;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+}
+
+article > div {
+    padding: 5px 15px;
+}
+.invite {
+    background: var(--primary-color-0);
+}
+
+.addr {
+    padding: 10px;
+}
+
+.addr ul{
+    list-style:none;
+    padding: 0;
+}
+
+#college {
+    background: var(--primary-color-3);
+}
+
+a {
+    color: white;
+}
+
