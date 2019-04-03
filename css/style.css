@@ -34,6 +34,10 @@ p {
 	color: white;
 }
 
+.resume:hover > .docx {
+	visibility: visible;
+}
+	
 /* classes */
 div.caption p{
 	font-family: 'IM Fell English', serif;
@@ -59,6 +63,20 @@ img.over{
 
 img.over:hover{
 	opacity: 0;
+}
+
+ul.links > li {
+	display:inline-block;
+}
+
+.links li + li:before {
+	content: " | ";
+	color: white;
+}
+
+.docx {
+	visibility:hidden;
+	width:0px;
 }
 
 /* animations */
