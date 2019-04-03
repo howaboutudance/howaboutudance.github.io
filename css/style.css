@@ -72,6 +72,7 @@ ul.links > li {
 .links li + li:before {
 	content: " | ";
 	color: white;
+	padding: 0 0.2em;
 }
 
 .docx {
