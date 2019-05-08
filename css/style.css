@@ -6,7 +6,6 @@ html{
 /* structure */
 body{
 	background: black;
-	animation: 3.5s slideinmain ease;
 }
 article{
 	font-family: "Roboto", sans-serif;
@@ -35,6 +34,10 @@ p {
 	color: white;
 }
 
+.resume:hover > .docx {
+	visibility: visible;
+}
+	
 /* classes */
 div.caption p{
 	font-family: 'IM Fell English', serif;
@@ -62,6 +65,21 @@ img.over:hover{
 	opacity: 0;
 }
 
+ul.links > li {
+	display:inline-block;
+}
+
+.links li + li:before {
+	content: " | ";
+	color: white;
+	padding: 0 0.2em;
+}
+
+.docx {
+	visibility:hidden;
+	width:0px;
+}
+
 /* animations */
 @keyframes flicker{
 	from {
@@ -78,20 +96,5 @@ img.over:hover{
 	}
 	to {
 		opacity: 0;
-	}
-}
-@keyframes slideinmain {
-	from {
-		margin-top: 100%;
-		background: #121023;
-		opacity: 0;
-	}
-	65% {
-		background: black;
-		opacity: 70;
-	}
-	to {
-		margin-top: 0%;
-		opacity: 100;
 	}
 }
