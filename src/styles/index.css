@@ -1,0 +1,240 @@
+@import "tailwindcss";
+
+@theme {
+  --color-coral: #ff7f50;
+
+  --font-body: "Roboto", sans-serif;
+  --font-caption: "IM Fell English", serif;
+
+  /* Glitch transition applied to the PNG layer via `animate-glitch-crossfade` */
+  --animate-glitch-crossfade: glitch-crossfade 6s steps(1, end) infinite;
+}
+
+/* ---- keyframes -------------------------------------------------------- */
+
+/* crossfades between the sketch (under) and photo (over) with a jump-cut
+   glitch burst around each transition instead of a smooth fade */
+@keyframes glitch-crossfade {
+  0%, 26% {
+    opacity: 0;
+    transform: translate(0, 0);
+    filter: none;
+  }
+  27% {
+    opacity: 1;
+    transform: translate(-3px, 1px);
+    filter: hue-rotate(15deg);
+  }
+  28% {
+    opacity: 0;
+    transform: translate(2px, -1px);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(4px, 0);
+    filter: hue-rotate(-10deg);
+  }
+  31% {
+    opacity: 0;
+  }
+  33% {
+    opacity: 1;
+    transform: translate(-2px, 2px);
+  }
+  35%, 60% {
+    opacity: 1;
+    transform: translate(0, 0);
+    filter: none;
+  }
+  62% {
+    opacity: 0;
+    transform: translate(3px, -2px);
+  }
+  63% {
+    opacity: 1;
+    transform: translate(-4px, 1px);
+    filter: hue-rotate(20deg);
+  }
+  65% {
+    opacity: 0;
+  }
+  67% {
+    opacity: 1;
+    transform: translate(2px, 0);
+  }
+  69%, 100% {
+    opacity: 0;
+    transform: translate(0, 0);
+    filter: none;
+  }
+}
+
+/* torn, color-shifted slices that flash only during the transition bursts */
+@keyframes glitch-slice {
+  0%, 26% {
+    opacity: 0;
+  }
+  27% {
+    opacity: 0.6;
+    clip-path: inset(10% 0 60% 0);
+    transform: translateX(6px);
+  }
+  28% {
+    opacity: 0;
+  }
+  29% {
+    opacity: 0.5;
+    clip-path: inset(55% 0 5% 0);
+    transform: translateX(-6px);
+  }
+  30% {
+    opacity: 0;
+  }
+  32% {
+    opacity: 0.55;
+    clip-path: inset(30% 0 40% 0);
+    transform: translateX(5px);
+  }
+  34%, 60% {
+    opacity: 0;
+  }
+  62% {
+    opacity: 0.5;
+    clip-path: inset(15% 0 55% 0);
+    transform: translateX(-5px);
+  }
+  64% {
+    opacity: 0;
+  }
+  66% {
+    opacity: 0.55;
+    clip-path: inset(45% 0 20% 0);
+    transform: translateX(6px);
+  }
+  68%, 100% {
+    opacity: 0;
+  }
+}
+
+/* horizontal bands that shift position during glitch bursts */
+@keyframes glitch-band {
+  0%, 26% { opacity: 0; }
+  27% {
+    opacity: 1;
+    background-position: 0 3px;
+    transform: translateX(5px);
+  }
+  28% { opacity: 0; }
+  29% {
+    opacity: 0.8;
+    background-position: 0 -5px;
+    transform: translateX(-3px);
+  }
+  30% { opacity: 0; }
+  32% {
+    opacity: 0.9;
+    background-position: 0 7px;
+    transform: translateX(2px);
+  }
+  34%, 60% { opacity: 0; }
+  62% {
+    opacity: 1;
+    background-position: 0 -4px;
+    transform: translateX(-5px);
+  }
+  64% { opacity: 0; }
+  66% {
+    opacity: 0.8;
+    background-position: 0 6px;
+    transform: translateX(3px);
+  }
+  68%, 100% { opacity: 0; }
+}
+
+/* ---- base ------------------------------------------------------------- */
+
+@layer base {
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+  }
+  body {
+    background: black;
+  }
+}
+
+/* ---- components ------------------------------------------------------- */
+
+@layer components {
+  /* Layered hematite crystal: svg underneath, png over it, plus two glitch
+     overlay pseudo-elements. clip-path / background-image / mix-blend-mode
+     are too involved for before:/after: arbitrary variants, so they live
+     here rather than in JSX. */
+  .crystal-image {
+    position: relative;
+    display: inline-block;
+    width: 440px;
+    max-width: 90vw;
+    aspect-ratio: 440 / 345;
+    margin: 0 auto;
+  }
+
+  .crystal-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* torn color-shifted slices */
+  .crystal-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background-image: url(/media/hematite.png);
+    background-size: cover;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    opacity: 0;
+    animation: glitch-slice 6s steps(1, end) infinite;
+  }
+
+  /* horizontal scan bands */
+  .crystal-image::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    pointer-events: none;
+    opacity: 0;
+    mix-blend-mode: screen;
+    background: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 7px,
+      rgba(200, 80, 60, 0.18) 7px,
+      rgba(200, 80, 60, 0.18) 9px
+    );
+    animation: glitch-band 6s steps(1, end) infinite;
+  }
+
+  /* freeze the overlay pseudo-elements on hover, revealing the clean svg
+     beneath. The PNG layer is frozen via `hover:opacity-0 hover:animate-none`
+     utilities in JSX so the disable lives in the same (utilities) cascade
+     layer as its `animate-glitch-crossfade`. */
+  .crystal-image:hover::before,
+  .crystal-image:hover::after {
+    opacity: 0;
+    animation: none;
+  }
+}
