@@ -23,7 +23,7 @@ npm install          # setup
 npm run dev          # Vite dev server
 npm run build        # tsc -b && vite build → dist/
 npm run preview      # serve dist/ locally
-npm run typecheck    # tsc --noEmit
+npm run typecheck    # tsc -b (checks all project references; app/node are noEmit)
 ```
 
 ## Repository layout
@@ -35,11 +35,11 @@ npm run typecheck    # tsc --noEmit
 │   ├── main.tsx
 │   ├── App.tsx
 │   ├── components/
-│   │   ├── CrystalHeader.tsx   # layered hematite images + flicker + caption
+│   │   ├── CrystalHeader.tsx   # layered hematite images + glitch animations + caption
 │   │   ├── LinkList.tsx        # CV / Resume / GitHub / LinkedIn
 │   │   └── Footer.tsx
 │   └── styles/
-│       └── index.css           # Tailwind entry + @theme + flicker keyframes
+│       └── index.css           # Tailwind entry + @theme tokens + @keyframes + @layer components (.crystal-image)
 ├── public/
 │   ├── media/              # hematite.png, hematite.svg, CV.pdf,
 │   │                       # resume.pdf, resume.docx — served at /media/*
@@ -69,22 +69,43 @@ and a single row of links. Reproduce it exactly, then stop.
 - **Background:** near-black layered dark scheme is acceptable, but default
   to `#000` for Milestone 1 parity.
 - **Crystal header:** `hematite.svg` underneath, `hematite.png` layered on
-  top of it. The PNG runs a ~5s alternating opacity "flicker" animation
-  (keyframes: 1 → 0.50 @23% → 0.15 @45% → 0.46 @68% → 0) and fades to
-  opacity 0 on hover, revealing the SVG. Implement as custom keyframes in
-  the Tailwind `@theme` block. Layering via CSS grid or absolute
-  positioning — do not port the old `margin-top: -345px` hack.
+  top of it. On hover the PNG fades to opacity 0, revealing the SVG. The
+  transition uses a **looping glitch effect** (not the old simple flicker)
+  implemented as three coordinated keyframe animations on a 6s
+  `steps(1, end) infinite` cycle with two burst windows at ~27–34% and
+  ~62–68%:
+    - `glitch-crossfade` — on the PNG layer: jump-cut opacity with
+      `translateX/Y` jitter and `hue-rotate` during bursts
+    - `glitch-slice` — on `::before` (hematite.png as overlay, `mix-blend-mode:
+      screen`): torn `clip-path: inset()` slices that shift horizontally
+    - `glitch-band` — on `::after`: repeating horizontal stripe gradient
+      (7 px gap / 2 px band, warm red-brown at ~0.18 opacity, `mix-blend-mode:
+      screen`) that shifts `background-position` and `translateX` each step
+  All three animations are disabled on hover. Implementation split:
+  - `@keyframes` blocks live in `src/styles/index.css` (CSS-only, no alternative)
+  - Animation shorthand tokens go in the `@theme` block:
+    `--animate-glitch-crossfade`, `--animate-glitch-slice`, `--animate-glitch-band`
+    — Tailwind generates the utility classes from these
+  - The PNG `<img>` gets animation utilities applied directly in JSX
+    (`animate-glitch-crossfade hover:opacity-0 hover:animate-none`)
+  - `::before` / `::after` pseudo-elements use a `.crystal-image` class in
+    `@layer components` in `index.css` — clip-path, background-image, and
+    mix-blend-mode are too complex for `before:`/`after:` arbitrary variants
+  Layering via CSS grid or absolute positioning — do not port the old
+  `margin-top: -345px` hack.
 - **Caption:** the word "Hematite" beneath the image, font **IM Fell
   English** italic (note correct spelling — the old site requested
   `IM+Felol+English` from Google Fonts and silently fell back for years).
 - **Body font:** Roboto 500.
 - **Links row:** inline list separated by `|`, white text, `coral`
   background on hover. Items, in order:
-  1. CV → `/media/CV.pdf`
-  2. Resume → `/media/resume.pdf`, with a `(docx)` link → `/media/resume.docx`
-     revealed on hover of the Resume item (keep this easter-egg behavior)
-  3. GitHub → `https://github.com/howaboutudance` with `rel="me"`
-  4. LinkedIn → `https://www.linkedin.com/in/mpenhall` with `rel="me"`
+  1. Resume → `/media/resume.pdf`, with a `(docx)` link → `/media/resume.docx`
+     shown alongside it (PDF is the default; docx is the Word version)
+  2. GitHub → `https://github.com/howaboutudance` with `rel="me"`
+  3. LinkedIn → `https://www.linkedin.com/in/mpenhall` with `rel="me"`
+  (No CV link — the `CV.pdf` file is stale; it was deliberately removed in
+  commit `8c5d624` and stays unlinked. The file remains under `public/media/`
+  for any existing bookmarks.)
 - **Footer:** copyright line, small centered text. Update the year range.
 - **`<head>`:** title `hematite.tech`; keep `rel="me"` identity links but
   fix them (https, correct domains). Load fonts via Google Fonts `<link>`
@@ -100,6 +121,7 @@ Do not carry these forward:
   Analytics — that's a Milestone 2 decision, not yours.
 - Invalid markup: `<tr>` elements inside `<ul>`, missing doctype, typo'd
   font family, `twitter.con`, single-slash `http:/` links
+- the old `./r` folder since it's old code that exists elsewhere.
 
 ## Deployment — Cloudflare Pages
 
@@ -141,4 +163,4 @@ Do not carry these forward:
 ## Out of scope for Milestone 1
 
 Blog, React Router, GA4/analytics, dark/light theming, redesigned color
-palette, animation rework beyond the flicker, subsite modernization.
+palette, subsite modernization.

@@ -1,51 +1,22 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-122609568-1"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hematite.tech</title>
 
-		  gtag('config', 'UA-122609568-1');
-		</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@1&family=Roboto:wght@500&display=swap"
+      rel="stylesheet"
+    />
 
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-		<link href="https://fonts.googleapis.com/css?family=IM+Felol+English:400i|Roboto:500" rel="stylesheet">
-
-		<link href="./css/style.css" rel="stylesheet">
-
-		<link rel="me" href="sms:+14252439426" />
-		<link rel="me" href="http:/facebook.com/mpenhallegon" />
-		<link rel="me" href="http://twitter.con/howaboutudance" />
-
-		<title>hematite.tech</title>
-	</head>
-	<body>
-		<article class="container">
-			<div class="image">
-				<img class="under" src=./media/hematite.svg /><br />
-				<img class="over" src=./media/hematite.png /><br />
-				<div class="caption">
-					<p>Hematite</p>
-				</div>
-			</div>
-			<ul class="links">
-				<li>
-					<tr><a href=./media/resume.pdf>Resume</a></tr>
-					<tr class="docx"><a href="./media/resume.docx">(docx)</a></tr>
-				</li> 
-			<li><a href="http://github.com/howaboutudance" rel="me">Github</a></li>
-			<li><a href="http://www.linkedin.com/in/mpenhall" rel="me">LinkedIn</a></li>
-			</ul>
-			
-		</article>
-		<footer>
-			<p>&copy; 2018-<span id="copyright-year"></span> Michael Penhallegon</p>
-		</footer>
-		<script>
-			document.getElementById('copyright-year').textContent = new Date().getFullYear();
-		</script>
-	</body>
+    <link rel="me" href="https://github.com/howaboutudance" />
+    <link rel="me" href="https://www.linkedin.com/in/mpenhall" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>
