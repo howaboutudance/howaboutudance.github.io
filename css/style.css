@@ -94,11 +94,36 @@ img.over{
 	animation: glitch-slice 6s steps(1, end) infinite;
 }
 
+.image::after{
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 4;
+	pointer-events: none;
+	opacity: 0;
+	mix-blend-mode: screen;
+	background: repeating-linear-gradient(
+		to bottom,
+		transparent 0px,
+		transparent 7px,
+		rgba(200, 80, 60, 0.18) 7px,
+		rgba(200, 80, 60, 0.18) 9px
+	);
+	animation: glitch-band 6s steps(1, end) infinite;
+}
+
 .image:hover img.over{
 	opacity: 0;
 	animation: none;
 }
 .image:hover::before{
+	opacity: 0;
+	animation: none;
+}
+.image:hover::after{
 	opacity: 0;
 	animation: none;
 }
@@ -175,6 +200,41 @@ ul.links > li {
 		transform: translate(0, 0);
 		filter: none;
 	}
+}
+
+/* horizontal bands that shift position during glitch bursts */
+@keyframes glitch-band {
+	0%, 26% { opacity: 0; }
+	27% {
+		opacity: 1;
+		background-position: 0 3px;
+		transform: translateX(5px);
+	}
+	28% { opacity: 0; }
+	29% {
+		opacity: 0.8;
+		background-position: 0 -5px;
+		transform: translateX(-3px);
+	}
+	30% { opacity: 0; }
+	32% {
+		opacity: 0.9;
+		background-position: 0 7px;
+		transform: translateX(2px);
+	}
+	34%, 60% { opacity: 0; }
+	62% {
+		opacity: 1;
+		background-position: 0 -4px;
+		transform: translateX(-5px);
+	}
+	64% { opacity: 0; }
+	66% {
+		opacity: 0.8;
+		background-position: 0 6px;
+		transform: translateX(3px);
+	}
+	68%, 100% { opacity: 0; }
 }
 
 /* torn, color-shifted slices that flash only during the transition bursts */
